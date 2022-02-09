@@ -18,9 +18,9 @@ namespace WebApplication1.Repository
             table = context.Set<T>();
 
         }
-        public async Task Delete(T entity)
+        public async Task Delete(int id)
         {
-           
+          var  entity = table.Find(id);
              table.Remove(entity);
             await Task.CompletedTask;
 
@@ -37,7 +37,7 @@ namespace WebApplication1.Repository
             return await table.ToListAsync();
         }
 
-        public async Task<T> GetByID(int id)
+        public virtual async Task<T> GetByID(int id)
         {
             return await table.FindAsync(id);
         }

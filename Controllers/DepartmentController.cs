@@ -19,15 +19,15 @@ namespace WebApplication1.Controllers
     {
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;
-      
-      
 
-        public DepartmentController(IUnitOfWork unitOfWork,IMapper mapper)
+
+
+        public DepartmentController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             uow = unitOfWork;
             this.mapper = mapper;
 
-        
+
         }
         // GET: api/<DepartmentController>
         [HttpGet]
@@ -38,25 +38,29 @@ namespace WebApplication1.Controllers
 
         // GET api/<DepartmentController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<DepartmentDTO>> Get(int id)
         {
-            return "value";
+            
+          var entity = await  uow.departmentRepository.GetByID(id);
+
+           var dept = mapper.Map<DepartmentDTO>(entity);
+            return Ok(dept);
         }
 
         // POST api/<DepartmentController>
         [HttpPost]
         public async Task Post(DepartmentDTO department)
         {
-           await uow.departmentRepository.Insert(mapper.Map<Department>(department)); 
-           await uow.SaveAsync();
+            await uow.departmentRepository.Insert(mapper.Map<Department>(department));
+            await uow.SaveAsync();
         }
 
         // PUT api/<DepartmentController>/5
         [HttpPut("{id}")]
         public async Task Put(DepartmentDTO department)
         {
-        
-           await uow.departmentRepository.Update(mapper.Map<Department>(department));
+            var dept = mapper.Map<Department>(department);
+            await uow.departmentRepository.Update(dept);
             await uow.SaveAsync();
         }
 
@@ -64,12 +68,10 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-           var entity =await uow.departmentRepository.GetByID(id);
-           await uow.departmentRepository.Delete(entity);
+          
+            await uow.departmentRepository.Delete(id);
+            await uow.SaveAsync();
 
-
-            await  uow.SaveAsync();
-            
         }
     }
 }

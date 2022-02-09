@@ -13,6 +13,9 @@ namespace WebApplication1.Mapper
         public EmployeeProfile()
         {
             CreateMap<DepartmentDTO, Department>();
+            CreateMap<EmployeeDTO, Employee>();
+            CreateMap<Employee, EmployeeDTO>();
+            CreateMap<Department, DepartmentDTO>();
         }
     }
 }

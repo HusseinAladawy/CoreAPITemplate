@@ -12,7 +12,7 @@ namespace WebApplication1.Repository
         Task<T> GetByID(int id);
         Task Insert(T entity);
         Task Update(T entity);
-        Task Delete(T entity);
+        Task Delete(int id);
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
     }
    

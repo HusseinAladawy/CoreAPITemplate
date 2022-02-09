@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.DTOs
 {
-    public class EmpolyeeDTO
+    public class EmployeeDTO
     {
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
@@ -13,6 +13,7 @@ namespace WebApplication1.DTOs
         public string Email { get; set; }
         public DateTime DateOfBrith { get; set; }
         public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
         public string PhotoPath { get; set; }
       
     }
